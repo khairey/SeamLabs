@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/task-1/{start}/{end}', [App\Http\Controllers\TaskController::class, 'task1']);
