@@ -19,9 +19,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::controller('\App\Http\Controllers\Api\AuthController')->group(function () {
-    Route::post('register', 'register'); // Signup
     Route::post('login', 'login'); // login
 });
+
+Route::controller('\App\Http\Controllers\Api\UserController')->group(function () {
+    Route::post('register', 'register');
+});
+Route::resource('user', '\App\Http\Controllers\Api\UserController')->only([
+    'index', 'show', 'update', "destroy"
+]);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('logout', '\App\Http\Controllers\Api\AuthController@logout'); //logout
