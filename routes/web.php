@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::get('/task-1/{start}/{end}', [App\Http\Controllers\TaskController::class, 'task1']);
+Route::get('/task-2/{inputString}', [App\Http\Controllers\TaskController::class, 'task2']);
