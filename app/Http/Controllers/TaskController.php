@@ -36,12 +36,73 @@ class TaskController extends Controller
         if (!ctype_alpha($inputString))
             return response()->json(['error' => 'Both inputs Must be Alphabetic '], 400);
         $alphabet = array();
-        for ($na = -1; $na < 500000 ; $na++) {
+        for ($na = -1; $na < 500000; $na++) {
             $alph = $this->generateAlphabet($na);
             $alphabet[] = $alph;
             if ($inputString == $alph) {
                 return response()->json(array_key_last($alphabet), 200);
             }
         }
+    }
+
+    function divisable($num)
+    {
+
+        if ($num % 2 == 0) {
+            $diff = $num / 2;
+            $num = max($diff, 2);
+            return $num;
+        }
+
+        if ($num % 3 == 0) {
+            $diff = $num / 3;
+            $num = max($diff, 3);
+            return $num;
+        }
+        if ($num % 4 == 0) {
+            $diff = $num / 4;
+            $num = max($diff, 4);
+            return $num;
+        }
+
+        if ($num % 5 == 0) {
+            $diff = $num / 5;
+            $num = max($diff, 5);
+            return $num;
+        }
+
+        if ($num % 6 == 0) {
+            $diff = $num / 6;
+            $num = max($diff, 6);
+            return $num;
+        }
+
+        if ($num % 7 == 0) {
+            $diff = $num / 7;
+            $num = max($diff, 7);
+            return $num;
+        }
+        return $num;
+    }
+    public function task3()
+    {
+        $results = array();
+        $arr = array(3, 4);
+        foreach ($arr as $num) {
+            $steps = 0;
+            while ($num !=   0) {
+                $oldnum = $num;
+                $num = $this->divisable($num);
+                if ($oldnum != $num) {
+                    $steps++;
+                } else {
+                    $num--;
+                    $steps++;
+                }
+            }
+
+            $results[] = $steps;
+        }
+        return response()->json($results, 200);
     }
 }
